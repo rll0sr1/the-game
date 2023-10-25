@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Football Game</title>
+  <style>
+    #field {
+      width: 500px;
+      height: 300px;
+      background-color: green;
+      position: relative;
+    }
+
+    #ball {
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      border-radius: 50%;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <h1>Football Game</h1>
+
+  <div id="field">
+    <div id="ball"></div>
+  </div>
+
+  <script>
+    // Game variables
+    let ballX = 0;
+    let ballY = 0;
+    let ballSpeedX = 2;
+    let ballSpeedY = 1;
+
+    const field = document.getElementById("field");
+    const ball = document.getElementById("ball");
+
+    // Update the game state
+    function updateGameState() {
+      ballX += ballSpeedX;
+      ballY += ballSpeedY;
+
+      // Check ball collisions with the field boundaries
+      if (ballX + ball.clientWidth >= field.clientWidth || ballX <= 0) {
+        ballSpeedX *= -1;
+      }
+
+      if (ballY + ball.clientHeight >= field.clientHeight || ballY <= 0) {
+        ballSpeedY *= -1;
+      }
+
+      // Update the ball position
+      ball.style.left = ballX + "px";
+      ball.style.top = ballY + "px";
+    }
+
+    // Start the game loop
+    const gameLoop = setInterval(updateGameState, 10);
+  </script>
+</body>
+</html>
